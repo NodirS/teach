@@ -27,3 +27,5 @@ Get request and validate response code and body
     Should Contain      ${body}                 location_type
     
     Log To Console      ${body}
+
+    # change 1
