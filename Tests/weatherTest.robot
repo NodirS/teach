@@ -5,6 +5,7 @@ Library             RequestsLibrary
 Library             JSONLibrary
 Library             Collections
 
+
 *** Test Cases ***
 Get request and validate response code and body
     [Documentation]     This test case verifies response code of GET request is 200
