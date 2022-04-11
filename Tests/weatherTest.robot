@@ -29,3 +29,5 @@ Get request and validate response code and body
     Log To Console      ${body}
 
     # change 1
+    # change 2
+
