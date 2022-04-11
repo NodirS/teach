@@ -35,3 +35,4 @@ Get request and validate response code and body
     # real WIP change 5
     # All SET
     # WIP change 6
+    # WIP change 7 commit-> push
