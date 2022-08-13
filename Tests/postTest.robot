@@ -5,6 +5,10 @@ Library             RequestsLibrary
 Library             JSONLibrary
 Library             Collections
 
+Resource            ${EXECDIR}${/}Resources${/}test.resource
+
+
+
 *** Test Cases ***
 Do a POST reqest and validate reponse code, response body and response headers
     [Documentation]     This test case verifies that response code of post request is 201

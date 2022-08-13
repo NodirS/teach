@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.9.12 on win32)" generated="20220813 14:48:57.787" rpa="false" schemaversion="3">
+<suite id="s1" name="weatherTest" source="C:\Users\Hamma\PP2\Tests\weatherTest.robot">
+<test id="s1-t1" name="Get request and validate response code and body" line="10">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mySession</arg>
+<arg>https://www.metaweather.com</arg>
+<arg>verify=true</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220813 14:48:58.147" level="INFO">Creating Session using : alias=mySession, url=https://www.metaweather.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20220813 14:48:58.147" endtime="20220813 14:48:58.147"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mySession</arg>
+<arg>/api/location/search/</arg>
+<arg>params=query=Helsinki</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220813 14:48:58.267" level="INFO">GET Request : url=https://www.metaweather.com/api/location/search/?query=Helsinki 
+ path_url=/api/location/search/?query=Helsinki 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220813 14:48:58.267" level="INFO">GET Response : url=https://www.metaweather.com/api/location/search/?query=Helsinki 
+ status=404, reason=Not Found 
+ headers={'Content-Length': '272', 'Content-Type': 'text/html; charset=UTF-8', 'Date': 'Sat, 13 Aug 2022 11:48:58 GMT'} 
+ body=
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv="content-type" content="text/html;charset=utf-8"&gt;
+&lt;title&gt;404 Page not found&lt;/title&gt;
+&lt;/head&gt;
+&lt;body text=#000000 bgcolor=#ffffff&gt;
+&lt;h1&gt;Error: Page not found&lt;/h1&gt;
+&lt;h2&gt;The requested URL was not found on this server.&lt;/h2&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;/body&gt;&lt;/html&gt;
+ 
+ </msg>
+<msg timestamp="20220813 14:48:58.267" level="FAIL">HTTPError: 404 Client Error: Not Found for url: https://www.metaweather.com/api/location/search/?query=Helsinki</msg>
+<status status="FAIL" starttime="20220813 14:48:58.147" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Status code PASS</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${title}</var>
+<arg>${response.json()}[0]</arg>
+<arg>title</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${titleFromList}</var>
+<arg>${title}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${titleFromList}</arg>
+<arg>Helsinki</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${body}</arg>
+<arg>location_type</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${body}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20220813 14:48:58.267" endtime="20220813 14:48:58.267"/>
+</kw>
+<doc>This test case verifies response code of GET request is 200
+response body contains the title key with value "Helsinki"
+and response body contains the key "location_type"</doc>
+<tag>Helsinki</tag>
+<tag>smoke</tag>
+<tag>weather</tag>
+<status status="FAIL" starttime="20220813 14:48:58.147" endtime="20220813 14:48:58.277">HTTPError: 404 Client Error: Not Found for url: https://www.metaweather.com/api/location/search/?query=Helsinki</status>
+</test>
+<doc>Simple API test: weather API</doc>
+<status status="FAIL" starttime="20220813 14:48:57.787" endtime="20220813 14:48:58.277"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">Helsinki</stat>
+<stat pass="0" fail="1" skip="0">smoke</stat>
+<stat pass="0" fail="1" skip="0">weather</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="weatherTest">weatherTest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
